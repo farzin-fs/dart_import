@@ -21,6 +21,6 @@ Set<String> getDirectoryFiles() => Directory('./lib')
     .where((path) => path.endsWith('.dart'))
     .toSet();
 
-String getRelativePath(String importPath, String filePath) {
-  return p.relative(importPath, from: filePath.replaceAll('./lib/', ''));
-}
+String getRelativePath(String importPath, String filePath) =>
+    p.relative("lib/$importPath",
+        from: filePath.substring(0, filePath.lastIndexOf("/")));
