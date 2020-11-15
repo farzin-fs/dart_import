@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:path/path.dart' as p;
+
 Future<bool> isExists(String path) async => await File(path).exists();
 
 Future<List<String>> readLines(String path) async =>
@@ -12,11 +14,13 @@ Set<String> addExtension(List<String> filenames) => filenames
     .map((path) => 'lib/${path.endsWith('.dart') ? path : '$path.dart'}')
     .toSet();
 
-Set<String> getDirectoryFiles() {
-  return Directory('./lib')
-      .listSync(recursive: true)
-      .where((item) => item is File)
-      .map((file) => file.path)
-      .where((path) => path.endsWith('.dart'))
-      .toSet();
+Set<String> getDirectoryFiles() => Directory('./lib')
+    .listSync(recursive: true)
+    .where((item) => item is File)
+    .map((file) => file.path)
+    .where((path) => path.endsWith('.dart'))
+    .toSet();
+
+String getRelativePath(String importPath, String filePath) {
+  return p.relative(importPath, from: filePath.replaceAll('./lib/', ''));
 }

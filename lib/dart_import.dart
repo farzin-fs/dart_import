@@ -26,8 +26,8 @@ Future<void> run(List<String> arguments) async {
 Future<void> makeChanges(String path) async {
   if (await file_utils.isExists(path)) {
     List<String> lines = await file_utils.readLines(path);
-    print(import_utils.fixImports(lines).join("\n"));
-    // await file_utils.writeContents(path, result);
+    var result = await import_utils.fixImports(lines, path);
+    await file_utils.writeContents(path, result.join("\n") + "\n");
   } else {
     print(Exception(Errors.fileNotFound(path)));
   }
