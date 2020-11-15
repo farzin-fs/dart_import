@@ -1,16 +1,18 @@
+import 'utils.dart' as utils;
+
 List<String> fixImports(List<String> lines) {
   List<String> newLines = [];
-  lines.forEach((line) {
+  lines.forEach((line) async {
     if (line.trim().startsWith("import ")) {
-      newLines.add(fixLine(line));
+      newLines.add(await fixLine(line));
     }
     newLines.add(line);
   });
   return newLines;
 }
 
-String fixLine(String line) {
-  String local = 'package:${"example"}';
+Future<String> fixLine(String line) async {
+  String local = 'package:${utils.getPackageName()}';
   RegExp regex =
       RegExp('^\\s*import\\s*([\'"])$local/([^\'"]*)[\'"]([^;]*);\\s*\$');
   if (regex.hasMatch(line)) {
