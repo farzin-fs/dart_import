@@ -2,7 +2,8 @@ library dart_import;
 
 import 'dart:async';
 
-import 'file_utils.dart' as file;
+import 'file_utils.dart' as file_utils;
+import 'import_utils.dart' as import_utils;
 import 'messages.dart';
 
 Future<void> run(List<String> arguments) async {
@@ -14,24 +15,20 @@ Future<void> run(List<String> arguments) async {
   }
 
   if (arguments[0] == ".") {
-    files = file.getDirectoryFiles();
+    files = file_utils.getDirectoryFiles();
   } else {
-    files = file.addExtension(arguments);
+    files = file_utils.addExtension(arguments);
   }
 
   files.forEach((file) => makeChanges(file));
 }
 
 Future<void> makeChanges(String path) async {
-  if (await file.isExists(path)) {
-    String content = await file.readContents(path);
-    content = fixImports(content);
-    await file.writeContents(path, content);
+  if (await file_utils.isExists(path)) {
+    List<String> lines = await file_utils.readLines(path);
+    print(import_utils.fixImports(lines).join("\n"));
+    // await file_utils.writeContents(path, result);
   } else {
     print(Exception(Errors.fileNotFound(path)));
   }
-}
-
-String fixImports(String contents) {
-  return contents.replaceAll('"MyWidget"', '"MyWidget Edited"');
 }
