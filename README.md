@@ -34,12 +34,8 @@ flutter pub run dart_import:main .
 ```
 
 ## TODO
-[x] Run on all files inside the `lib` directory.
-
-[x] Run on only given files.
-
-[x] Change package imports to relative paths.
-
-[] Sort imports alphabetically.
-
-[] Remove unused imports
+- [x] Run on all files inside the `lib` directory.
+- [x] Run on only given files.
+- [x] Change package imports to relative paths.
+- [ ] Sort imports alphabetically.
+- [ ] Remove unused imports
