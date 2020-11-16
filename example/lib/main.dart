@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:example/widgets/my_widget.dart';
+import 'widgets/widget_b.dart';
+import 'package:example/widgets/widget_a.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,7 +15,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyWidget(),
+      home: Column(
+        children: [
+          WidgetA(),
+          WidgetB(),
+        ],
+      ),
     );
   }
 }

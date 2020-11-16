@@ -1,0 +1,1 @@
+String helperA = 'Helper A';
