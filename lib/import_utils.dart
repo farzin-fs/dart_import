@@ -3,17 +3,19 @@ import 'utils.dart' as utils;
 
 Future<List<String>> fixImports(List<String> lines, String path) async {
   List<String> newLines = lines;
+  int lastImportIndex;
   for (int i = 0; i < lines.length; i++) {
     if (lines[i].trim().isEmpty) {
       continue;
     }
     if (!lines[i].trim().contains(RegExp('import|part'))) {
+      lastImportIndex = i;
       break;
     }
     newLines[i] = await fixImportPath(lines[i], path);
   }
 
-  newLines = sortImports(newLines);
+  newLines = sortImports(newLines, lastImportIndex);
 
   return newLines;
 }
@@ -40,8 +42,47 @@ Future<String> fixImportPath(String line, String path) async {
   }
 }
 
-List<String> sortImports(List<String> lines) {
-  return lines;
+List<String> sortImports(List<String> lines, int index) {
+  final List<String> importLines = lines.take(index).toList();
+  final List<String> codeLines = lines.skip(index).toList();
+  final List<String> dartImports = <String>[];
+  final List<String> packageImports = <String>[];
+  final List<String> relativeImports = <String>[];
+  final List<String> partImports = <String>[];
+
+  for (int i = 0; i < importLines.length; i++) {
+    final String line = importLines[i].trim();
+    if (line.isNotEmpty) {
+      if (line.startsWith('import')) {
+        if (line.contains('dart:')) {
+          dartImports.add(line);
+        } else if (line.contains('package:')) {
+          packageImports.add(line);
+        } else {
+          relativeImports.add(line);
+        }
+      } else if (line.startsWith('part')) {
+        partImports.add(line);
+      }
+    }
+  }
+
+  dartImports.sort();
+  packageImports.sort();
+  relativeImports.sort();
+  partImports.sort();
+
+  return <String>[
+    ...dartImports,
+    dartImports.isNotEmpty ? '\n' : null,
+    ...packageImports,
+    packageImports.isNotEmpty ? '\n' : null,
+    ...relativeImports,
+    relativeImports.isNotEmpty ? '\n' : null,
+    ...partImports,
+    partImports.isNotEmpty ? '\n' : null,
+    ...codeLines
+  ].where((String line) => line != null).toList();
 }
 
 List<String> removeUnusedImports(List<String> lines) {
