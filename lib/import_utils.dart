@@ -26,6 +26,13 @@ Future<String> fixImportLine(String line, String path) async {
     String ending = match[3];
     return 'import ${quote}${relative}${quote}${ending};';
   } else {
+    RegExp regex = RegExp('^\\s*import\\s*([\'"])\\./(.*)\$');
+    if (regex.hasMatch(line)) {
+      RegExpMatch match = regex.firstMatch(line);
+      String quote = match[1];
+      String end = match[2];
+      return 'import ${quote}${end}';
+    }
     return line;
   }
 }
