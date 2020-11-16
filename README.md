@@ -5,17 +5,6 @@ It will change all Dart/Flutter imports to relative format, remove duplicated im
 
 ## Getting Started
 
-### Install
-
-Add `dart_import` to your `dev_dependencies`:
-
-```yaml
-dev_dependencies:
-  dart_import: "^version"
-```
-
-### Run
-
 You can run `dart_import` with the following command, You need to specify at least one file name.
 
 ```bash

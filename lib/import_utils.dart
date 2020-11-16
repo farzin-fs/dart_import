@@ -74,13 +74,13 @@ List<String> sortImports(List<String> lines, int index) {
 
   return <String>[
     ...dartImports,
-    dartImports.isNotEmpty ? '\n' : null,
+    dartImports.isNotEmpty ? '' : null,
     ...packageImports,
-    packageImports.isNotEmpty ? '\n' : null,
+    packageImports.isNotEmpty ? '' : null,
     ...relativeImports,
-    relativeImports.isNotEmpty ? '\n' : null,
+    relativeImports.isNotEmpty ? '' : null,
     ...partImports,
-    partImports.isNotEmpty ? '\n' : null,
+    partImports.isNotEmpty ? '' : null,
     ...codeLines
   ].where((String line) => line != null).toList();
 }
