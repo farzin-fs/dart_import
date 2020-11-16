@@ -1,7 +1,6 @@
 name: dart_import
-description: A simple Dart package to help with import statements.
+description: A simple Dart package to help with import statements. It will change all Dart/Flutter imports to relative format, remove duplicated imports and, sort imports alphabetically.
 version: 0.0.2
-author: Farzin Mirzaie<farzin.mirzaie@gmail.com>
 homepage: https://github.com/farzin-fs/dart_import
 
 environment:

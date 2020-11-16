@@ -1,7 +1,8 @@
 # dart_import
 
 A simple Dart package to help with import statements.
-It will change all Dart/Flutter imports to relative format, remove duplicated imports and sort imports alphabetically.
+
+It will change all Dart/Flutter imports to relative format, remove duplicated imports and, sort imports alphabetically.
 
 ## Getting Started
 

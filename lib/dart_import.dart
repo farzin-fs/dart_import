@@ -21,7 +21,7 @@ Future<void> run(List<String> arguments) async {
   }
 
   for (int i = 0; i < files.length; i++) {
-    makeChanges(files.elementAt(i));
+    await makeChanges(files.elementAt(i));
   }
 }
 
