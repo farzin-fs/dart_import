@@ -45,10 +45,10 @@ Future<String> fixImportPath(String line, String path) async {
 List<String> sortImports(List<String> lines, int index) {
   final List<String> importLines = lines.take(index).toList();
   final List<String> codeLines = lines.skip(index).toList();
-  final List<String> dartImports = <String>[];
-  final List<String> packageImports = <String>[];
-  final List<String> relativeImports = <String>[];
-  final List<String> partImports = <String>[];
+  List<String> dartImports = <String>[];
+  List<String> packageImports = <String>[];
+  List<String> relativeImports = <String>[];
+  List<String> partImports = <String>[];
 
   for (int i = 0; i < importLines.length; i++) {
     final String line = importLines[i].trim();
@@ -67,10 +67,10 @@ List<String> sortImports(List<String> lines, int index) {
     }
   }
 
-  dartImports.sort();
-  packageImports.sort();
-  relativeImports.sort();
-  partImports.sort();
+  dartImports = removeDuplicateImports(dartImports)..sort();
+  packageImports = removeDuplicateImports(packageImports)..sort();
+  relativeImports = removeDuplicateImports(relativeImports)..sort();
+  partImports = removeDuplicateImports(partImports)..sort();
 
   return <String>[
     ...dartImports,
@@ -83,6 +83,10 @@ List<String> sortImports(List<String> lines, int index) {
     partImports.isNotEmpty ? '\n' : null,
     ...codeLines
   ].where((String line) => line != null).toList();
+}
+
+List<String> removeDuplicateImports(List<String> lines) {
+  return lines.toSet().toList();
 }
 
 List<String> removeUnusedImports(List<String> lines) {
