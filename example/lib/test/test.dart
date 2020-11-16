@@ -15,3 +15,21 @@ import 'package:example/helpers/helper_a.dart';
 
 
 import 'dart:async';
+
+class Test extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: Column(
+        children: [
+          WidgetA(),
+          WidgetB(),
+        ],
+      ),
+    );
+  }
+}

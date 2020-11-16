@@ -2,20 +2,23 @@ import 'file_utils.dart' as file_utils;
 import 'utils.dart' as utils;
 
 Future<List<String>> fixImports(List<String> lines, String path) async {
-  final List<String> newLines = lines;
+  List<String> newLines = lines;
   for (int i = 0; i < lines.length; i++) {
     if (lines[i].trim().isEmpty) {
       continue;
     }
-    if (!lines[i].trim().contains('import')) {
+    if (!lines[i].trim().contains(RegExp('import|part'))) {
       break;
     }
-    newLines[i] = await fixImportLine(lines[i], path);
+    newLines[i] = await fixImportPath(lines[i], path);
   }
+
+  newLines = sortImports(newLines);
+
   return newLines;
 }
 
-Future<String> fixImportLine(String line, String path) async {
+Future<String> fixImportPath(String line, String path) async {
   final String packageName = 'package:${await utils.getPackageName()}';
   final RegExp regex =
       RegExp('^\\s*import\\s*([\'"])$packageName/([^\'"]*)[\'"]([^;]*);\\s*\$');
@@ -35,4 +38,12 @@ Future<String> fixImportLine(String line, String path) async {
     }
     return line;
   }
+}
+
+List<String> sortImports(List<String> lines) {
+  return lines;
+}
+
+List<String> removeUnusedImports(List<String> lines) {
+  return lines;
 }
