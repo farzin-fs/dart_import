@@ -1,8 +1,8 @@
 name: dart_import
-description: A simple dart package to change all Dart/Flutter imports to relative format.
+description: A simple Dart package to help with import statements.
 version: 0.0.1
 author: Farzin Mirzaie<farzin.mirzaie@gmail.com>
-homepage:
+homepage: https://github.com/farzin-fs/dart_import
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
