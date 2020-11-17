@@ -9,19 +9,19 @@ It will change all Dart/Flutter imports to relative format, remove duplicated im
 You can run `dart_import` with the following command, You need to specify at least one file name.
 
 ```bash
-flutter pub run dart_import:main [filename]
+flutter pub run dart_import [filename]
 ```
 
 You can pass multiple files and exclude `.dart` extension.
 
 ```bash
-flutter pub run dart_import:main main my_widget utils.dart
+flutter pub run dart_import main my_widget utils.dart
 ```
 
 Will run on all `.dart` files inside the `lib` directory.
 
 ```bash
-flutter pub run dart_import:main .
+flutter pub run dart_import .
 ```
 
 ## TODO
