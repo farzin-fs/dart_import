@@ -26,7 +26,7 @@ dependencies:
 You can run `dart_import` with the following command, You need to specify at least one file name.
 
 ```bash
-flutter pub run dart_import [filename]
+dart_import [filename]
 ```
 
 You can pass multiple files and exclude `.dart` extension.
