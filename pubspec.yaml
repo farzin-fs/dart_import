@@ -6,5 +6,8 @@ homepage: https://github.com/farzin-fs/dart_import
 environment:
   sdk: ">=2.7.0 <3.0.0"
 
+executables:
+  dart_import: dart_import
+
 dependencies:
   path: ^1.7.0
