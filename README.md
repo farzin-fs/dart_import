@@ -44,11 +44,15 @@ dart_import .
 Note: If you have installed `dart_import` locally then you need to prefix commands with `pub run` or `flutter pub run`.
 
 ## TODO
-- [x] Run on all files inside the `lib` directory.
-- [x] Run on only given files.
-- [x] Change package imports to relative paths.
-- [x] Sort imports alphabetically.
+- [x] Should work locally as a dev dependency
+- [x] Should work globally as a `pub global` package
+- [x] Add linter options
+- [x] Run on all files inside the `lib` directory
+- [x] Run on only given files
+- [x] Change package imports to relative paths
+- [x] Sort imports alphabetically
 - [x] Remove duplicate imports
-- [ ] Remove unused imports
-- [ ] Should exclude `library` statements
+- [x] Should exclude `library` statement
 - [x] Add help command
+- [ ] Remove unused imports
+- [ ] Add missing imports

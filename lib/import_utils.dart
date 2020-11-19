@@ -45,6 +45,7 @@ Future<String> fixImportPath(String line, String path) async {
 List<String> sortImports(List<String> lines, int index) {
   final List<String> importLines = lines.take(index).toList();
   final List<String> codeLines = lines.skip(index).toList();
+  List<String> libraryStatement = <String>[];
   List<String> dartImports = <String>[];
   List<String> packageImports = <String>[];
   List<String> relativeImports = <String>[];
@@ -63,16 +64,21 @@ List<String> sortImports(List<String> lines, int index) {
         }
       } else if (line.startsWith('part')) {
         partImports.add(line);
+      } else if (line.startsWith('library')) {
+        libraryStatement.add(line);
       }
     }
   }
 
+  libraryStatement = removeDuplicateImports(libraryStatement)..sort();
   dartImports = removeDuplicateImports(dartImports)..sort();
   packageImports = removeDuplicateImports(packageImports)..sort();
   relativeImports = removeDuplicateImports(relativeImports)..sort();
   partImports = removeDuplicateImports(partImports)..sort();
 
   return <String>[
+    ...libraryStatement,
+    libraryStatement.isNotEmpty ? '' : null,
     ...dartImports,
     dartImports.isNotEmpty ? '' : null,
     ...packageImports,
