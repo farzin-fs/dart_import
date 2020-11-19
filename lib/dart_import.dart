@@ -9,8 +9,8 @@ import 'messages.dart' as messages;
 Future<void> run(List<String> arguments) async {
   Set<String> files;
 
-  if (arguments.isEmpty) {
-    print(Exception(messages.argumentsRequired));
+  if (arguments.isEmpty || arguments[0] == '-h' || arguments[0] == '--help') {
+    print(messages.help);
     return;
   }
 

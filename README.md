@@ -51,4 +51,4 @@ Note: If you have installed `dart_import` locally then you need to prefix comman
 - [x] Remove duplicate imports
 - [ ] Remove unused imports
 - [ ] Should exclude `library` statements
-- [ ] Add `dart_import -help` command
+- [x] Add help command
