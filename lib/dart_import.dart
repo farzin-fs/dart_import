@@ -27,10 +27,18 @@ Future<void> run(List<String> arguments) async {
 
 Future<void> makeChanges(String path) async {
   if (await file_utils.isExists(path)) {
-    final List<String> lines = await file_utils.readLines(path);
-    final List<String> result = await import_utils.fixImports(lines, path);
-    await file_utils.writeContents(path, result.join('\n') + '\n');
+    await runFixer(path, import_utils.removeUnusedImports);
+    await runFixer(path, import_utils.fixImports);
   } else {
     print(Exception(messages.fileNotFound(path)));
   }
+}
+
+Future<void> runFixer(
+  String path,
+  Future<List<String>> Function(List<String>, String) fixer,
+) async {
+  final List<String> lines = await file_utils.readLines(path);
+  final List<String> result = await fixer(lines, path);
+  await file_utils.writeContents(path, result.join('\n') + '\n');
 }

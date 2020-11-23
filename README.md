@@ -32,7 +32,7 @@ dart_import [filename]
 You can pass multiple files and exclude `.dart` extension.
 
 ```bash
-dart_import main my_widget utils.dart
+dart_import main widgets/my_widget utils.dart
 ```
 
 Will run on all `.dart` files inside the `lib` directory.
@@ -54,5 +54,6 @@ Note: If you have installed `dart_import` locally then you need to prefix comman
 - [x] Remove duplicate imports
 - [x] Should exclude `library` statement
 - [x] Add help command
-- [ ] Remove unused imports
+- [x] Remove unused imports
 - [ ] Add missing imports
+- [ ] Refactor code

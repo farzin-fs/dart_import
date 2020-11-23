@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'file_utils.dart' as file_utils;
 import 'utils.dart' as utils;
 
@@ -95,6 +97,31 @@ List<String> removeDuplicateImports(List<String> lines) {
   return lines.toSet().toList();
 }
 
-List<String> removeUnusedImports(List<String> lines) {
+Future<List<String>> removeUnusedImports(
+  List<String> lines,
+  String path,
+) async {
+  try {
+    final ProcessResult result =
+        await Process.run('dartanalyzer', <String>[path]);
+    final List<String> issues = result.stdout.toString().split('\n');
+    final List<String> unusedImports = issues
+        .where((String issue) => issue.contains('Unused import:'))
+        .toList();
+
+    final RegExp regex = RegExp(r'(?!dart:)(\d+)(?=:)');
+    for (int i = unusedImports.length - 1; i >= 0; i--) {
+      final String line = unusedImports.elementAt(i);
+      if (regex.hasMatch(line)) {
+        final RegExpMatch match = regex.firstMatch(line);
+        final int lineNumber = int.tryParse(match[0]);
+        if (lineNumber != null) {
+          lines.removeAt(lineNumber - 1);
+        }
+      }
+    }
+  } catch (e) {
+    print(e);
+  }
   return lines;
 }
