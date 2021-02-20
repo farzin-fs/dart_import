@@ -29,7 +29,7 @@ You can run `dart_import` with the following command, You need to specify at lea
 dart_import [filename]
 ```
 
-You can pass multiple files and exclude `.dart` extension.
+You can pass multiple files and exclude the `.dart` extension.
 
 ```bash
 dart_import main widgets/my_widget utils.dart
@@ -41,19 +41,8 @@ Will run on all `.dart` files inside the `lib` directory.
 dart_import .
 ```
 
-Note: If you have installed `dart_import` locally then you need to prefix commands with `pub run` or `flutter pub run`.
+Note: If you have installed `dart_import` as a local dependency, then you need to prefix commands with `pub run` or `flutter pub run`.
 
 ## TODO
-- [x] Should work locally as a dev dependency
-- [x] Should work globally as a `pub global` package
-- [x] Add linter options
-- [x] Run on all files inside the `lib` directory
-- [x] Run on only given files
-- [x] Change package imports to relative paths
-- [x] Sort imports alphabetically
-- [x] Remove duplicate imports
-- [x] Should exclude `library` statement
-- [x] Add help command
-- [x] Remove unused imports
 - [ ] Add missing imports
 - [ ] Refactor code

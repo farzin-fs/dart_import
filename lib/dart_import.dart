@@ -7,23 +7,17 @@ import 'import_utils.dart' as import_utils;
 import 'messages.dart' as messages;
 
 Future<void> run(List<String> arguments) async {
-  Set<String> files;
-
   if (arguments.isEmpty || arguments[0] == '-h' || arguments[0] == '--help') {
     print(messages.help);
     return;
   }
 
-  if (arguments[0] == '.') {
-    files = file_utils.getDirectoryFiles();
-  } else {
-    files = file_utils.addExtension(arguments);
-  }
-
-  for (int i = 0; i < files.length; i++) {
-    await makeChanges(files.elementAt(i));
-  }
+  getFiles(arguments)..forEach(makeChanges);
 }
+
+Set<String> getFiles(List<String> arguments) => arguments[0] == '.'
+    ? file_utils.getDirectoryFiles()
+    : file_utils.addExtension(arguments);
 
 Future<void> makeChanges(String path) async {
   if (await file_utils.isExists(path)) {

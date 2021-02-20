@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:path/path.dart' as p;
+import 'package:path/path.dart' as path;
 
 Future<bool> isExists(String path) async => File(path).existsSync();
 
@@ -22,5 +22,5 @@ Set<String> getDirectoryFiles() => Directory('./lib')
     .toSet();
 
 String getRelativePath(String importPath, String filePath) =>
-    p.relative('lib/$importPath',
+    path.relative('lib/$importPath',
         from: filePath.substring(0, filePath.lastIndexOf('/')));
